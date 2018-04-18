@@ -1,7 +1,7 @@
 # vagrantLAMP
-php, mysql, apache2, vagrant &amp; other...
+php7.2, mysql, apache2, vagrant &amp; other...
 
-###Install
+#Install
 
 1. Install Vagrant (https://www.vagrantup.com/)
 2. Install VirtualBox (https://www.virtualbox.org/)

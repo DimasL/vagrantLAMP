@@ -50,6 +50,7 @@ sudo apt -y install php7.2 php7.2-curl php7.2-gd php7.2-json php7.2-cgi php7.2-m
 # Install mcrypt
 sudo apt-get -y install gcc make autoconf libc-dev pkg-config libmcrypt-dev
 sudo pecl install mcrypt-1.0.1
+echo 'extension=mcrypt.so' | sudo tee --append /etc/php/7.2/apache2/php.ini > /dev/null
 
 #Install Apache2
 sudo apt -y install apache2
