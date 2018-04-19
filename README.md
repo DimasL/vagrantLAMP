@@ -12,4 +12,20 @@ php7.2, mysql, apache2, vagrant &amp; other...
 
 ---
 
+### XDebug
+
+1. https://www.screencast.com/t/kNmFXy3qpXE
+2. https://www.screencast.com/t/ruxxnhM5e
+3. Install browser extension "**Xdebug helper**" (for Chrome https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc)
+4. Go to extension settings (for Chrome chrome-extension://eadndfjplgieldjbigjakmdgkmoaaaoc/options.html)
+5. Set IDE key **Other**: **AAP_XDEBUG_KEY**
+6. Switch to "**Debug**" status **Xdebug helper** extension
+
 Go to http://192.168.33.60/
+
+---
+
+MySql(5.7.21-0ubuntu0.16.04.1)
+ - database name: **databasename**
+ - user name: **user**
+ - password: **password**

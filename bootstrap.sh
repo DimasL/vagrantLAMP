@@ -84,16 +84,28 @@ sudo cp modules/xdebug.so /usr/lib/php/20170718
 echo 'zend_extension="/usr/lib/php/20170718/xdebug.so"' | sudo tee --append /etc/php/7.2/apache2/php.ini > /dev/null
 sudo ln -s /etc/php/7.2/mods-available/xdebug.ini /etc/php/7.2/fpm/conf.d/20-xdebug.ini
 echo 'xdebug.remote_enable=1
-xdebug.remote_enable=1
+xdebug.default_enable=1
 xdebug.cli_color=1
 xdebug.remote_port=9000
-xdebug.profiler_enable=1
+xdebug.remote_host=10.0.2.2
 xdebug.idekey=AAP_XDEBUG_KEY
 xdebug.remote_connect_back=1
 xdebug.remote_mode=req
 xdebug.profiler_enable=1
 xdebug.profiler_enable_trigger=1
 ' | sudo tee  --append /etc/php/7.2/fpm/conf.d/20-xdebug.ini > /dev/null
+
+echo 'xdebug.remote_enable=1
+xdebug.default_enable=1
+xdebug.cli_color=1
+xdebug.remote_port=9000
+xdebug.remote_host=10.0.2.2
+xdebug.idekey=AAP_XDEBUG_KEY
+xdebug.remote_connect_back=1
+xdebug.remote_mode=req
+xdebug.profiler_enable=1
+xdebug.profiler_enable_trigger=1
+' | sudo tee  --append /etc/php/7.2/apache2/php.ini > /dev/null
 
 
 #FOR CLI
@@ -127,7 +139,14 @@ echo "<VirtualHost *:80>
         DocumentRoot /var/www/html/site/public
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
+        <Directory /var/www/html/site/public>
+            Options Indexes FollowSymLinks MultiViews
+            AllowOverride All
+            Order allow,deny
+            allow from all
+        </Directory>
 </VirtualHost>" | sudo tee /etc/apache2/sites-available/000-default.conf > /dev/null
+sudo a2enmod rewrite
 
 #Vsyakaya dich
 sudo apt-get -y install imagemagick
@@ -139,12 +158,9 @@ service apache2 restart
 
 phpunit --version
 
-#Git clone project
-#cd /var/www/html/site/
-#git clone sshProjectGitAddress -b develop .
-
-#Laravel configurating
-#cd /var/www/html/site/
-#composer update
-#php artisan key:generate
-#php artisan migrate
+mysql -uroot -ppassword
+CREATE DATABASE databasename;
+CREATE USER 'user'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON databasename.* To 'user'@'localhost' IDENTIFIED BY 'password';
+FLUSH PRIVILEGES;
+exit;
